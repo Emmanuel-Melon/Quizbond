@@ -1,8 +1,58 @@
 import { Button } from "ui";
-import { Flex, Stack, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  useRadioGroup,
+  useRadio,
+  Radio,
+  RadioGroup,
+} from "@chakra-ui/react";
 import Image from "next/image";
 
+function RadioCard(props) {
+  const { getInputProps, getCheckboxProps } = useRadio(props);
+
+  const input = getInputProps();
+  const checkbox = getCheckboxProps();
+
+  return (
+    <Box as="label">
+      <input {...input} />
+      <Box
+        {...checkbox}
+        cursor="pointer"
+        borderWidth="1px"
+        borderRadius="md"
+        boxShadow="md"
+        _checked={{
+          bg: "green.600",
+          color: "white",
+          borderColor: "green.600",
+        }}
+        _focus={{
+          boxShadow: "outline",
+        }}
+        px={5}
+        py={3}
+      >
+        {props.children}
+      </Box>
+    </Box>
+  );
+}
+
 export const MoodSelector = () => {
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "moods",
+    defaultValue: "Excited",
+    onChange: (nextValue) => console.log("changed"),
+  });
+
+  const group = getRootProps();
+  const moods = ["Excited", "Argumentative", "Curious", "Mindblown"];
   return (
     <Flex gap={4} alignItems="center">
       <Image
@@ -20,11 +70,15 @@ export const MoodSelector = () => {
           you'll help the app match you with other users who are feeling
           similarly.
         </Text>
-        <Flex gap={4}>
-          <Button>🥳 Excited</Button>
-          <Button>😏 Argumentative</Button>
-          <Button>🤔 Curious</Button>
-          <Button>🤯 Mindblown</Button>
+        <Flex width="100%" {...group} gap={4}>
+          {moods.map((value) => {
+            const radio = getRadioProps({ value });
+            return (
+              <RadioCard key={value} {...radio}>
+                {value}
+              </RadioCard>
+            );
+          })}
         </Flex>
       </Stack>
     </Flex>

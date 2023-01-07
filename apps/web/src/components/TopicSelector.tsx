@@ -1,8 +1,58 @@
 import { Button } from "ui";
-import { Flex, Stack, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  useRadioGroup,
+  useRadio,
+  Radio,
+  RadioGroup,
+} from "@chakra-ui/react";
 import Image from "next/image";
 
+function RadioCard(props) {
+  const { getInputProps, getCheckboxProps } = useRadio(props);
+
+  const input = getInputProps();
+  const checkbox = getCheckboxProps();
+
+  return (
+    <Box as="label">
+      <input {...input} />
+      <Box
+        {...checkbox}
+        cursor="pointer"
+        borderWidth="1px"
+        borderRadius="md"
+        boxShadow="md"
+        _checked={{
+          bg: "orange.600",
+          color: "white",
+          borderColor: "orange.600",
+        }}
+        _focus={{
+          boxShadow: "outline",
+        }}
+        px={5}
+        py={3}
+      >
+        {props.children}
+      </Box>
+    </Box>
+  );
+}
+
 export const TopicSelector = () => {
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "topics",
+    defaultValue: "Fashion",
+    onChange: (nextValue) => console.log("changed"),
+  });
+
+  const group = getRootProps();
+  const interests = ["Music", "Fashion", "Food", "Sports", "Games"];
   return (
     <Flex gap={4} alignItems="center">
       <Image
@@ -21,13 +71,16 @@ export const TopicSelector = () => {
           similarly.
         </Text>
         <Stack>
-          <Flex gap={4}>
-            <Button>🎵 Music</Button>
-            <Button>🧥 Fashion</Button>
-            <Button>🥗 Food</Button>
-            <Button>🏀 Sports</Button>
-            <Button>🎮 Games</Button>
-          </Flex>
+        <Flex width="100%" {...group} gap={4}>
+          {interests.map((value) => {
+            const radio = getRadioProps({ value });
+            return (
+              <RadioCard key={value} {...radio}>
+                {value}
+              </RadioCard>
+            );
+          })}
+        </Flex>
         </Stack>
       </Stack>
     </Flex>
