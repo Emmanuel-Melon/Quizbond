@@ -5,6 +5,10 @@ import { MoodSelector } from "../src/components/MoodSelector";
 import { TopicSelector } from "../src/components/TopicSelector";
 
 export default function Web() {
+
+  const initQuest = () => {}
+  const shareGame = () => {}
+  const reportBug = () => {}
   return (
     <Flex p="8">
       <Stack>
@@ -16,9 +20,9 @@ export default function Web() {
           <TopicSelector />
         </Stack>
         <Flex gap={4}>
-          <Button>Start Quizzing!</Button>
-          <Button>Share</Button>
-          <Button>Report Bug</Button>
+          <Button onClick={initQuest}>Start Quizzing!</Button>
+          <Button onClick={initQuest}>Share</Button>
+          <Button onClick={initQuest}>Report Bug</Button>
         </Flex>
       </Stack>
     </Flex>

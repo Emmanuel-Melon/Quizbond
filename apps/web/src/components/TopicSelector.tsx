@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 
-function RadioCard(props) {
+function RadioCard(props: any) {
   const { getInputProps, getCheckboxProps } = useRadio(props);
 
   const input = getInputProps();
@@ -67,7 +67,7 @@ export const TopicSelector = () => {
         </Heading>
         <Text>
           By selecting the mood that best reflects your current emotional state,
-          you'll help the app match you with other users who are feeling
+          you will help the app match you with other users who are feeling
           similarly.
         </Text>
         <Stack>
