@@ -5,12 +5,16 @@ import {
   ColorModeProvider,
   theme as chakraTheme,
 } from "@chakra-ui/react";
+import { client as apolloClient } from "@quizbond/lib/apollo";
+import { ApolloProvider } from "@apollo/client";
 
 function MyApp({ Component, pageProps: { ...pageProps } }: AppProps) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <ApolloProvider client={apolloClient}>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </ApolloProvider>
   );
 }
 

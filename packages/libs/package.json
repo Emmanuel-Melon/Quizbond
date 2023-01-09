@@ -1,0 +1,13 @@
+{
+  "name": "@quizbond/lib",
+  "version": "1.0.0",
+  "description": "libraries used in the project",
+  "main": "index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@apollo/client": "^3.7.3",
+    "@apollo/react-hooks": "^4.0.0",
+    "graphql": "^16.6.0",
+    "graphql-ws": "^5.11.2"
+  }
+}
