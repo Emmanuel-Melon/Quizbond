@@ -1,0 +1,3 @@
+[submodule "quizbond_server"]
+	path = quizbond_server
+	url = https://github.com/Emmanuel-Melon/quizbond_server.git
