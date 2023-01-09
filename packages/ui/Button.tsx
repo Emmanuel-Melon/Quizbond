@@ -17,7 +17,6 @@ type ButtonProps = {
 export const Button: FC<ButtonProps> = ({
   children,
   onClick,
-  icon,
   isLoading = false,
   loadingText,
   disabled = false,
